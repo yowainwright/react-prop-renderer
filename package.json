@@ -1,0 +1,46 @@
+{
+  "name": "react-endpoint-renderer",
+  "version": "1.0.0",
+  "description": "Render your endpoints on the fly with React. 🧪",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yowainwright/react-endpoint-renderer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yowainwright/react-endpoint-renderer/issues"
+  },
+  "homepage": "https://github.com/yowainwright/react-endpoint-renderer#readme",
+  "devDependencies": {
+    "@testing-library/react": "^12.1.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.30",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^25.2.2",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "jest": "^27.3.1",
+    "pnpm": "^6.18.0",
+    "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "ts-jest": "^27.0.7",
+    "ts-lib": "^0.0.5",
+    "typescript": "^4.4.4"
+  }
+}
