@@ -1,10 +1,9 @@
-
-   
 {
-  "arrowParens": "always",
   "semi": false,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "useTabs": false,
   "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "quoteProps": "consistent"
+  "jsxSingleQuote": true,
+  "proseWrap": "preserve"
 }
