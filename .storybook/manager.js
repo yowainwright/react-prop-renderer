@@ -4,8 +4,7 @@ import { addons } from '@storybook/addons'
 addons.setConfig({
   theme: create({
     base: 'light',
-    brandImage: logo,
-    brandTitle: 'React Test Render',
+    brandTitle: 'React Endpoint Renderer 🧪',
     brandUrl: 'https://github.com/yowainwright/react-test-renderer',
   }),
 })

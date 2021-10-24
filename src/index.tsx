@@ -1,14 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
 
-export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint }
-
-const isSingleValue = (endpoint: Endpoint): boolean => typeof endpoint === 'number' || typeof endpoint === 'string'
+export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint } | null
 
 export type EndpointRendererProps = {
   endpoint: Endpoint
   depth?: number
+  id?: string
 }
-export function EndpointRenderer({ endpoint, depth = 1 }: EndpointRendererProps): JSX.Element {
+
+export type EndpointRendererPortalProps = {
+  children: JSX.Element
+  container: HTMLElement | null
+}
+
+export const isSingleValue = (endpoint: Endpoint): boolean =>
+  typeof endpoint === 'number' || typeof endpoint === 'string'
+
+export function EndpointRenderPortal({ children, container }: EndpointRendererPortalProps): JSX.Element | null {
+  if (!container) return null
+  const el = document.createElement('div')
+
+  useEffect(() => {
+    container?.appendChild(el)
+    return () => {
+      container?.removeChild(el)
+    }
+  }, [el])
+
+  return ReactDOM.createPortal(children, el)
+}
+
+export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendererProps): JSX.Element {
   if (endpoint && isSingleValue(endpoint)) {
     return (
       <section className={`endpoint endpoint--recursion-${depth}`}>
@@ -32,7 +55,7 @@ export function EndpointRenderer({ endpoint, depth = 1 }: EndpointRendererProps)
                   value
                 </span>
               ) : (
-                <EndpointRenderer endpoint={value} depth={depth + 1} />
+                <EndpointRendererContent endpoint={value} depth={depth + 1} />
               )}
             </li>
           ))}
@@ -58,7 +81,7 @@ export function EndpointRenderer({ endpoint, depth = 1 }: EndpointRendererProps)
                     {itemValue.toString()}
                   </span>
                 ) : (
-                  <EndpointRenderer endpoint={itemValue} depth={depth + 1} />
+                  <EndpointRendererContent endpoint={itemValue} depth={depth + 1} />
                 )}
               </li>
             )
@@ -80,3 +103,44 @@ export function EndpointRenderer({ endpoint, depth = 1 }: EndpointRendererProps)
     )
   }
 }
+
+export function EndpointRenderer({
+  endpoint,
+  depth,
+  id = 'endpoint-renderer-container',
+}: EndpointRendererProps): JSX.Element {
+  const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
+
+  useEffect(() => {
+    const portalRoot = document.getElementById(id)
+    setPortalContainer(document.createElement('div'))
+
+    if (!portalRoot) {
+      const containerDiv = document.createElement('div')
+      containerDiv.id = id
+      document.documentElement.appendChild(containerDiv)
+    }
+  }, [id])
+
+  useEffect(() => {
+    const portalRoot = document.getElementById(id)
+
+    if (portalRoot && portalContainer) {
+      portalRoot.appendChild(portalContainer)
+    }
+
+    return function cleanup() {
+      if (portalContainer) {
+        portalRoot?.removeChild(portalContainer)
+      }
+    }
+  }, [id, portalContainer])
+
+  return (
+    <EndpointRenderPortal container={portalContainer}>
+      <EndpointRendererContent endpoint={endpoint} depth={depth} />
+    </EndpointRenderPortal>
+  )
+}
+
+export default EndpointRenderer
