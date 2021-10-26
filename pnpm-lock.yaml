@@ -30,6 +30,7 @@ specifiers:
   prettier: ^2.4.1
   react: ^17.0.2
   react-dom: ^17.0.2
+  styled-components: ^5.3.3
   ts-jest: ^27.0.7
   ts-lib: ^0.0.5
   ts-loader: 8.2.0
@@ -65,6 +66,7 @@ devDependencies:
   prettier: 2.4.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
   ts-jest: 27.0.7_2f922f3a7b393b6257194064b7cba811
   ts-lib: 0.0.5
   ts-loader: 8.2.0_typescript@4.4.4
@@ -1470,6 +1472,23 @@ packages:
       '@babel/parser': 7.15.8
       '@babel/types': 7.15.6
       debug: 4.3.2
+      globals: 11.12.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@babel/traverse/7.15.4_supports-color@5.5.0:
+    resolution: {integrity: sha512-W6lQD8l4rUbQR/vYgSuCAE75ADyyQvOpFVsvPPdkhf6lATXAsQIG9YdtOcu8BB1dZ0LKu+Zo3c1wEcbKeuhdlA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/code-frame': 7.15.8
+      '@babel/generator': 7.15.8
+      '@babel/helper-function-name': 7.15.4
+      '@babel/helper-hoist-variables': 7.15.4
+      '@babel/helper-split-export-declaration': 7.15.4
+      '@babel/parser': 7.15.8
+      '@babel/types': 7.15.6
+      debug: 4.3.2_supports-color@5.5.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -4421,6 +4440,18 @@ packages:
       - supports-color
     dev: true
 
+  /babel-plugin-styled-components/1.13.3_styled-components@5.3.3:
+    resolution: {integrity: sha512-meGStRGv+VuKA/q0/jXxrPNWEm4LPfYIqxooDTdmh8kFsP/Ph7jJG5rUPwUPX3QHUvggwdbgdGpo88P/rRYsVw==}
+    peerDependencies:
+      styled-components: '>= 2'
+    dependencies:
+      '@babel/helper-annotate-as-pure': 7.15.4
+      '@babel/helper-module-imports': 7.15.4
+      babel-plugin-syntax-jsx: 6.18.0
+      lodash: 4.17.21
+      styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
+    dev: true
+
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
     dev: true
@@ -4864,6 +4895,10 @@ packages:
   /camelcase/6.2.0:
     resolution: {integrity: sha512-c7wVvbw3f37nuobQNtgsgG9POC9qMbNuMQmTCqZv23b6MIz0fcYpBiOlv9gEN/hdLdnZTDQhg6e9Dq5M1vKvfg==}
     engines: {node: '>=10'}
+    dev: true
+
+  /camelize/1.0.0:
+    resolution: {integrity: sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=}
     dev: true
 
   /caniuse-lite/1.0.30001270:
@@ -5406,6 +5441,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /css-color-keywords/1.0.0:
+    resolution: {integrity: sha1-/qJhbcZ2spYmhrOvjb2+GAskTgU=}
+    engines: {node: '>=4'}
+    dev: true
+
   /css-loader/3.6.0_webpack@4.46.0:
     resolution: {integrity: sha512-M5lSukoWi1If8dhQAUCvj4H8vUt3vOnwbQBH9DdTm/s4Ym2B/3dPMtYZeJmq7Q3S3Pa+I94DcZ7pc9bP14cWIQ==}
     engines: {node: '>= 8.9.0'}
@@ -5436,6 +5476,14 @@ packages:
       domhandler: 4.2.2
       domutils: 2.8.0
       nth-check: 2.0.1
+    dev: true
+
+  /css-to-react-native/3.0.0:
+    resolution: {integrity: sha512-Ro1yETZA813eoyUp2GDBhG2j+YggidUmzO1/v9eYBKR2EHVEniE2MI/NqpTQ954BMpTPZFsGNPm46qFB9dpaPQ==}
+    dependencies:
+      camelize: 1.0.0
+      css-color-keywords: 1.0.0
+      postcss-value-parser: 4.1.0
     dev: true
 
   /css-what/5.1.0:
@@ -5507,6 +5555,19 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
+
+  /debug/4.3.2_supports-color@5.5.0:
+    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+      supports-color: 5.5.0
     dev: true
 
   /decimal.js/10.3.1:
@@ -6741,7 +6802,7 @@ packages:
     resolution: {integrity: sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==}
     engines: {node: '>=6.11.5', yarn: '>=1.0.0'}
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.15.8
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.0.4
@@ -11754,6 +11815,28 @@ packages:
     resolution: {integrity: sha512-CzFnRRXhzWIdItT3OmF8SQfWyahHhjq3HwcMNCNLn+N7klOOqPjMeG/4JSu77D7ypZdGvSzvkrbyeTMizz2VrA==}
     dependencies:
       inline-style-parser: 0.1.1
+    dev: true
+
+  /styled-components/5.3.3_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>= 16.8.0'
+      react-dom: '>= 16.8.0'
+      react-is: '>= 16.8.0'
+    dependencies:
+      '@babel/helper-module-imports': 7.15.4
+      '@babel/traverse': 7.15.4_supports-color@5.5.0
+      '@emotion/is-prop-valid': 0.8.8
+      '@emotion/stylis': 0.8.5
+      '@emotion/unitless': 0.7.5
+      babel-plugin-styled-components: 1.13.3_styled-components@5.3.3
+      css-to-react-native: 3.0.0
+      hoist-non-react-statics: 3.3.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      shallowequal: 1.1.0
+      supports-color: 5.5.0
     dev: true
 
   /supports-color/5.5.0:
