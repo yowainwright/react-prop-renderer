@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
+import { ThemeContext } from 'styled-components'
+
+import { Section, List, Item, Text } from './styles'
 
 export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint } | null
 
@@ -32,74 +35,76 @@ export function EndpointRenderPortal({ children, container }: EndpointRendererPo
 }
 
 export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendererProps): JSX.Element {
+  const theme = useContext(ThemeContext)
+
   if (endpoint && isSingleValue(endpoint)) {
     return (
-      <section className={`endpoint endpoint--recursion-${depth}`}>
-        <ul className='endpoint__items' data-endoint-type='Single Item'>
-          <li className={`endpoint__item endpoint__item--${endpoint}`} data-value={endpoint}>
-            <span className={`endpoint__text endpoint__text--${endpoint}`} data-value={endpoint}>
+      <Section className={`endpoint endpoint--recursion-${depth}`}>
+        <List className='endpoint__items' data-endoint-type='Single Item'>
+          <Item className={`endpoint__item endpoint__item--${endpoint}`} data-value={endpoint}>
+            <Text className={`endpoint__text endpoint__text--${endpoint}`} data-value={endpoint}>
               {endpoint as React.ReactNode}
-            </span>
-          </li>
-        </ul>
-      </section>
+            </Text>
+          </Item>
+        </List>
+      </Section>
     )
   } else if (endpoint && Array.isArray(endpoint)) {
     return (
-      <section className={`endpoint endpoint--recursion-${depth}`}>
-        <ul className='endpoint__items' data-endoint-type='Array'>
+      <Section className={`endpoint endpoint--recursion-${depth}`}>
+        <List className='endpoint__items' data-endoint-type='Array'>
           {endpoint.map((value, i) => (
-            <li className={`endpoint__item endpoint__item--${value}`} key={i} data-value={value}>
+            <Item className={`endpoint__item endpoint__item--${value}`} key={i} data-value={value}>
               {typeof value !== 'object' ? (
-                <span className={`endpoint__text endpoint__text--${value}`} data-value={value}>
+                <Text className={`endpoint__text endpoint__text--${value}`} data-value={value}>
                   value
-                </span>
+                </Text>
               ) : (
                 <EndpointRendererContent endpoint={value} depth={depth + 1} />
               )}
-            </li>
+            </Item>
           ))}
-        </ul>
-      </section>
+        </List>
+      </Section>
     )
   } else if (endpoint && Object.keys(endpoint).length) {
     return (
-      <section className={`endpoint endpoint--recursion-${depth}`}>
-        <ul className='endpoint__items' data-endoint-type='Object'>
+      <Section className={`endpoint endpoint--recursion-${depth}`}>
+        <List className='endpoint__items' data-endoint-type='Object'>
           {Object.entries(endpoint).map(([itemName, itemValue], i) => {
             return (
-              <li className={`endpoint__item endpoint__item--${itemName}`} key={i} data-name={itemName}>
-                <span
+              <Item className={`endpoint__item endpoint__item--${itemName}`} key={i} data-name={itemName}>
+                <Text
                   className={`endpoint__text endpoint__text--${itemName}`}
                   data-name={itemName}
                   data-value={JSON.stringify(itemValue)}
                 >
                   {itemName}:
-                </span>{' '}
+                </Text>{' '}
                 {typeof itemValue === 'string' || typeof itemValue === 'number' ? (
-                  <span className={`endpoint__text endpoint__text--${itemValue}`} data-value={itemValue}>
+                  <Text className={`endpoint__text endpoint__text--${itemValue}`} data-value={itemValue}>
                     {itemValue.toString()}
-                  </span>
+                  </Text>
                 ) : (
                   <EndpointRendererContent endpoint={itemValue} depth={depth + 1} />
                 )}
-              </li>
+              </Item>
             )
           })}
-        </ul>
-      </section>
+        </List>
+      </Section>
     )
   } else {
     return (
-      <section className={`endpoint endpoint--recursion-${depth}`}>
-        <ul className='endpoint__items' data-endoint-type='No Data'>
-          <li className='endpoint__item endpoint__item--no-data'>
-            <span className='endpoint__text endpoint__text--no-data' data-value='no-data'>
+      <Section className={`endpoint endpoint--recursion-${depth}`}>
+        <List className='endpoint__items' data-endoint-type='No Data'>
+          <Item className='endpoint__item endpoint__item--no-data'>
+            <Text className='endpoint__text endpoint__text--no-data' data-value='no-data'>
               no data
-            </span>
-          </li>
-        </ul>
-      </section>
+            </Text>
+          </Item>
+        </List>
+      </Section>
     )
   }
 }
