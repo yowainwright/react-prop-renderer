@@ -58,11 +58,11 @@
 }
 
 
-[data-endoint-type] {
+[data-endpoint-type] {
 	position: relative;
 }
 
-[data-endoint-type]::before {
+[data-endpoint-type]::before {
   background: #fff;
   content: attr(data-endoint-type);
   display: inline-block;

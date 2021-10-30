@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { ThemeContext } from 'styled-components'
+import { ThemeContext, ThemeProvider } from 'styled-components'
 
-import { Section, List, Item, Text } from './styles'
+import { Section, List, Item, Text, Title, Background, Modal, Button, defaultTheme } from './styles'
 
 export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint } | null
 
@@ -10,6 +10,8 @@ export type EndpointRendererProps = {
   endpoint: Endpoint
   depth?: number
   id?: string
+  title?: string
+  theme?: typeof defaultTheme
 }
 
 export type EndpointRendererPortalProps = {
@@ -113,6 +115,8 @@ export function EndpointRenderer({
   endpoint,
   depth,
   id = 'endpoint-renderer-container',
+  title,
+  theme = defaultTheme,
 }: EndpointRendererProps): JSX.Element {
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
 
@@ -141,10 +145,26 @@ export function EndpointRenderer({
     }
   }, [id, portalContainer])
 
+  function closePortal() {
+    if (portalContainer) {
+      setPortalContainer(null)
+    }
+  }
+
   return (
-    <EndpointRenderPortal container={portalContainer}>
-      <EndpointRendererContent endpoint={endpoint} depth={depth} />
-    </EndpointRenderPortal>
+    <ThemeProvider theme={theme}>
+      <EndpointRenderPortal container={portalContainer}>
+        <Background className='endpoint__background'>
+          <Modal className='endpoint__modal'>
+            {title && <Title className='endpoint__title'>{title}</Title>}
+            <EndpointRendererContent endpoint={endpoint} depth={depth} />
+            <Button id='endpoint-button-close' className='endpoint__btn endpoint__btn--close' onClick={closePortal}>
+              X
+            </Button>
+          </Modal>
+        </Background>
+      </EndpointRenderPortal>
+    </ThemeProvider>
   )
 }
 
