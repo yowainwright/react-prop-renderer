@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "target": "es5",
-    "module": "es2015",
-    "lib": ["es2015", "es2016", "es2017", "dom"],
+    "module": "esnext",
+    "lib": ["es2015", "es2016", "es2017", "dom", "esnext"],
     "jsx": "react",
     "rootDirs": ["src", "stories"],
     "strict": true,
@@ -16,5 +17,5 @@
     "outDir": "dist/",
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src"]
+  "exclude": ["node_modules", "dist", "types", "stories", "jest.config.ts", "jest.setup.ts", "*.js", "src/__tests__/*"]
 }
