@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const defaultTheme = {
+export const theme = {
   colors: {
     light: '#fff',
     lightBorder: '#ccc',

@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { ThemeContext, ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
-import { Section, List, Item, Text, Title, Background, Modal, Button, defaultTheme } from './styles'
+import { Section, List, Item, Text, Title, Background, Modal, Button, theme } from './styles'
 
 export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint } | null
 
@@ -11,7 +11,7 @@ export type EndpointRendererProps = {
   depth?: number
   id?: string
   title?: string
-  theme?: typeof defaultTheme
+  theme?: typeof theme
 }
 
 export type EndpointRendererPortalProps = {
@@ -37,8 +37,6 @@ export function EndpointRenderPortal({ children, container }: EndpointRendererPo
 }
 
 export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendererProps): JSX.Element {
-  const theme = useContext(ThemeContext)
-
   if (endpoint && isSingleValue(endpoint)) {
     return (
       <Section className={`endpoint endpoint--recursion-${depth}`}>
@@ -116,7 +114,7 @@ export function EndpointRenderer({
   depth,
   id = 'endpoint-renderer-container',
   title,
-  theme = defaultTheme,
+  theme,
 }: EndpointRendererProps): JSX.Element {
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
 

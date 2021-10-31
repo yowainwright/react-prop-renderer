@@ -22,6 +22,30 @@ pnpm install react-endpoint-renderer
 
 ## Setup
 
+After installing react endpoint renderer, import it and use it to your liking.
 
+Here's a quick example/ideas:
+
+```jsx
+import React, { useEffect, useState } from 'react';
+import { EndpointRenderer } from 'react-endpoint-renderer'
+
+export function SomeAwesomeEndpointSubmission({ isWhiteListedHost }) {
+  const isRenderingEndpoint = new URLSearchParams(search).get("isRenderingEndpoint")
+  const [data, setData] = useState({});
+
+  function handleSubmit async (endpoint) {
+    const updatedData = await endpoind();
+    setData(updatedData);
+  }
+
+  return (
+    <div>
+      <button type='submit' onClick={handClick}>Submit Endpoint</button>
+      {isWhiteListedHost && isRenderingEndpoint && Object.keys(data).length > 0 && <EndpointRenderer endpoint={data} />}
+    </div>
+  )
+}
+```
 
 ## Usage
