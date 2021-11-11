@@ -23,7 +23,9 @@ export const isSingleValue = (endpoint: Endpoint): boolean =>
   typeof endpoint === 'number' || typeof endpoint === 'string'
 
 export function EndpointRenderPortal({ children, container }: EndpointRendererPortalProps): JSX.Element | null {
-  if (!container) return null
+  if (!container) {
+    return null
+  }
   const el = document.createElement('div')
 
   useEffect(() => {

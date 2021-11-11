@@ -4,6 +4,8 @@
   "description": "Render your endpoints on the fly with React 🧪",
   "main": "index.js",
   "scripts": {
+    "lint": "npx eslint . --ext .ts,.tsx --fix",
+    "lint:ci": "npx eslint --ext .ts,.tsx",
     "test": "npx jest",
     "storybook": "npx start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -61,5 +63,36 @@
     "ts-lib": "^0.0.5",
     "ts-loader": "8.2.0",
     "typescript": "^4.4.4"
+  },
+   "config": {
+    "commitizen": {
+      "path": "node_modules/@commitlint/prompt"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "header-max-length": [
+        2,
+        "always",
+        120
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-checkout": "if [[ $HUSKY_GIT_PARAMS =~ 1$ ]]; then pnpm i -r; fi",
+      "post-merge": "pnpm i -r",
+      "post-rewrite": "pnpm i -r",
+      "pre-commit": "npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md}": [
+      "pnpm run lint"
+    ]
   }
 }
