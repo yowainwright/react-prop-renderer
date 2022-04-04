@@ -4,6 +4,7 @@
   "description": "Render your endpoints on the fly with React 🧪",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && tsup src/index.tsx src/styles.ts",
     "lint": "npx eslint . --ext .ts,.tsx --fix",
     "lint:ci": "npx eslint --ext .ts,.tsx",
     "test": "npx jest",
@@ -59,10 +60,12 @@
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "styled-components": "^5.3.3",
     "ts-jest": "^27.0.7",
     "ts-lib": "^0.0.5",
     "ts-loader": "8.2.0",
+    "tsup": "^5.12.4",
     "typescript": "^4.4.4"
   },
   "config": {
