@@ -3,45 +3,44 @@ import { ComponentMeta } from '@storybook/react'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from '../src/styles'
-import { EndpointRendererContent } from '../src'
-// import './endpointrenderer.css'
+import { PropRendererContent } from '../src'
 
 export default {
-  title: 'Example/EndpointRenderer',
-  component: EndpointRendererContent,
+  title: 'Example/propToRenderRenderer',
+  component: PropRendererContent,
   argTypes: {
-    endpoint: { foo: 'bar' },
+    propToRender: { foo: 'bar' },
   },
-} as ComponentMeta<typeof EndpointRendererContent>
+} as ComponentMeta<typeof PropRendererContent>
 
 export const Primary = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <EndpointRendererContent endpoint={{ foo: 'bar' }} />
+    <PropRendererContent propToRender={{ foo: 'bar' }} />
   </ThemeProvider>
 )
 
 export const AsString = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <EndpointRendererContent endpoint={'foo'} />
+    <PropRendererContent propToRender={'foo'} />
   </ThemeProvider>
 )
 
 export const AsArray = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <EndpointRendererContent endpoint={['baz', 'buzz']} />
+    <PropRendererContent propToRender={['baz', 'buzz']} />
   </ThemeProvider>
 )
 
 export const AsObject = (): JSX.Element => (
   <ThemeProvider theme={theme}>
-    <EndpointRendererContent endpoint={{ foo: 'bar', baz: ['baz'], buzz: { test: 'foo' } }} />
+    <PropRendererContent propToRender={{ foo: 'bar', baz: ['baz'], buzz: { test: 'foo' } }} />
   </ThemeProvider>
 )
 
 export const AsComplexObject = () => (
   <ThemeProvider theme={theme}>
-    <EndpointRendererContent
-      endpoint={{ foo: 'bar', baz: ['baz'], buzz: { test: 'foo' }, fluff: { test: { deepTest: 'bar' } } }}
+    <PropRendererContent
+      propToRender={{ foo: 'bar', baz: ['baz'], buzz: { test: 'foo' }, fluff: { test: { deepTest: 'bar' } } }}
     />
   </ThemeProvider>
 )

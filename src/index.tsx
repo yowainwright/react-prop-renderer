@@ -4,25 +4,25 @@ import { ThemeProvider } from 'styled-components'
 
 import { Section, List, Item, Text, Title, Background, Modal, Button, theme } from './styles'
 
-export type Endpoint = string | number | Array<Endpoint> | { [key: string]: Endpoint } | null
+export type Prop = string | number | Array<Prop> | { [key: string]: Prop } | null
 
-export type EndpointRendererProps = {
-  endpoint: Endpoint
+export type PropRendererProps = {
+  propToRender: Prop
   depth?: number
   id?: string
   title?: string
   theme?: typeof theme
 }
 
-export type EndpointRendererPortalProps = {
+export type PropRendererPortalProps = {
   children: JSX.Element
   container: HTMLElement | null
 }
 
-export const isSingleValue = (endpoint: Endpoint): boolean =>
-  typeof endpoint === 'number' || typeof endpoint === 'string'
+export const isSingleValue = (propToRender: Prop): boolean =>
+  typeof propToRender === 'number' || typeof propToRender === 'string'
 
-export function EndpointRenderPortal({ children, container }: EndpointRendererPortalProps): JSX.Element | null {
+export function PropRendererPortal({ children, container }: PropRendererPortalProps): JSX.Element | null {
   if (!container) {
     return null
   }
@@ -38,57 +38,74 @@ export function EndpointRenderPortal({ children, container }: EndpointRendererPo
   return ReactDOM.createPortal(children, el)
 }
 
-export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendererProps): JSX.Element {
-  if (endpoint && isSingleValue(endpoint)) {
+export function PropRendererContent({ propToRender, depth = 1 }: PropRendererProps): JSX.Element {
+  if (propToRender && isSingleValue(propToRender)) {
     return (
-      <Section className={`endpoint endpoint--recursion-${depth}`}>
-        <List className='endpoint__items' data-endoint-type='Single Item'>
-          <Item className={`endpoint__item endpoint__item--${endpoint}`} data-value={endpoint}>
-            <Text className={`endpoint__text endpoint__text--${endpoint}`} data-value={endpoint}>
-              {endpoint as React.ReactNode}
+      <Section className={`react-prop-renderer react-prop-renderer--recursion-${depth}`}>
+        <List className='react-prop-renderer__items' data-prop-type='Single Item'>
+          <Item
+            className={`react-prop-renderer__item react-prop-renderer__item--${propToRender}`}
+            data-value={propToRender}
+          >
+            <Text
+              className={`react-prop-renderer__text react-prop-renderer__text--${propToRender}`}
+              data-value={propToRender}
+            >
+              {propToRender as React.ReactNode}
             </Text>
           </Item>
         </List>
       </Section>
     )
-  } else if (endpoint && Array.isArray(endpoint)) {
+  } else if (propToRender && Array.isArray(propToRender)) {
     return (
-      <Section className={`endpoint endpoint--recursion-${depth}`}>
-        <List className='endpoint__items' data-endoint-type='Array'>
-          {endpoint.map((value, i) => (
-            <Item className={`endpoint__item endpoint__item--${value}`} key={i} data-value={value}>
+      <Section className={`react-prop-renderer react-prop-renderer--recursion-${depth}`}>
+        <List className='react-prop-renderer__items' data-prop-type='Array'>
+          {propToRender.map((value, i) => (
+            <Item
+              className={`react-prop-renderer__item react-prop-renderer__item--${value}`}
+              key={i}
+              data-value={value}
+            >
               {typeof value !== 'object' ? (
-                <Text className={`endpoint__text endpoint__text--${value}`} data-value={value}>
+                <Text className={`react-prop-renderer__text react-prop-renderer__text--${value}`} data-value={value}>
                   value
                 </Text>
               ) : (
-                <EndpointRendererContent endpoint={value} depth={depth + 1} />
+                <PropRendererContent propToRender={value} depth={depth + 1} />
               )}
             </Item>
           ))}
         </List>
       </Section>
     )
-  } else if (endpoint && Object.keys(endpoint).length) {
+  } else if (propToRender && Object.keys(propToRender).length) {
     return (
-      <Section className={`endpoint endpoint--recursion-${depth}`}>
-        <List className='endpoint__items' data-endoint-type='Object'>
-          {Object.entries(endpoint).map(([itemName, itemValue], i) => {
+      <Section className={`react-prop-renderer react-prop-renderer--recursion-${depth}`}>
+        <List className='react-prop-renderer__items' data-endoint-type='Object'>
+          {Object.entries(propToRender).map(([itemName, itemValue], i) => {
             return (
-              <Item className={`endpoint__item endpoint__item--${itemName}`} key={i} data-name={itemName}>
+              <Item
+                className={`react-prop-renderer__item react-prop-renderer__item--${itemName}`}
+                key={i}
+                data-name={itemName}
+              >
                 <Text
-                  className={`endpoint__text endpoint__text--${itemName}`}
+                  className={`react-prop-renderer__text react-prop-renderer__text--${itemName}`}
                   data-name={itemName}
                   data-value={JSON.stringify(itemValue)}
                 >
                   {itemName}:
                 </Text>{' '}
                 {typeof itemValue === 'string' || typeof itemValue === 'number' ? (
-                  <Text className={`endpoint__text endpoint__text--${itemValue}`} data-value={itemValue}>
+                  <Text
+                    className={`react-prop-renderer__text react-prop-renderer__text--${itemValue}`}
+                    data-value={itemValue}
+                  >
                     {itemValue.toString()}
                   </Text>
                 ) : (
-                  <EndpointRendererContent endpoint={itemValue} depth={depth + 1} />
+                  <PropRendererContent propToRender={itemValue} depth={depth + 1} />
                 )}
               </Item>
             )
@@ -98,10 +115,10 @@ export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendere
     )
   } else {
     return (
-      <Section className={`endpoint endpoint--recursion-${depth}`}>
-        <List className='endpoint__items' data-endoint-type='No Data'>
-          <Item className='endpoint__item endpoint__item--no-data'>
-            <Text className='endpoint__text endpoint__text--no-data' data-value='no-data'>
+      <Section className={`react-prop-renderer react-prop-renderer--recursion-${depth}`}>
+        <List className='react-prop-renderer__items' data-prop-type='No Data'>
+          <Item className='react-prop-renderer__item react-prop-renderer__item--no-data'>
+            <Text className='react-prop-renderer__text react-prop-renderer__text--no-data' data-value='no-data'>
               no data
             </Text>
           </Item>
@@ -111,13 +128,13 @@ export function EndpointRendererContent({ endpoint, depth = 1 }: EndpointRendere
   }
 }
 
-export function EndpointRenderer({
-  endpoint,
+export function PropRenderer({
+  propToRender,
   depth,
-  id = 'endpoint-renderer-container',
+  id = 'prop-renderer-container',
   title,
   theme,
-}: EndpointRendererProps): JSX.Element {
+}: PropRendererProps): JSX.Element {
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
 
   useEffect(() => {
@@ -153,19 +170,23 @@ export function EndpointRenderer({
 
   return (
     <ThemeProvider theme={theme}>
-      <EndpointRenderPortal container={portalContainer}>
-        <Background className='endpoint__background'>
-          <Modal className='endpoint__modal'>
-            {title && <Title className='endpoint__title'>{title}</Title>}
-            <EndpointRendererContent endpoint={endpoint} depth={depth} />
-            <Button id='endpoint-button-close' className='endpoint__btn endpoint__btn--close' onClick={closePortal}>
+      <PropRendererPortal container={portalContainer}>
+        <Background className='react-prop-renderer__background'>
+          <Modal className='react-prop-renderer__modal'>
+            {title && <Title className='react-prop-renderer__title'>{title}</Title>}
+            <PropRendererContent propToRender={propToRender} depth={depth} />
+            <Button
+              id='react-prop-renderer-button-close'
+              className='react-prop-renderer__btn react-prop-renderer__btn--close'
+              onClick={closePortal}
+            >
               X
             </Button>
           </Modal>
         </Background>
-      </EndpointRenderPortal>
+      </PropRendererPortal>
     </ThemeProvider>
   )
 }
 
-export default EndpointRenderer
+export default PropRenderer
