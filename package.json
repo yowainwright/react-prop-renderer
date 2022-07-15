@@ -4,7 +4,9 @@
   "description": "Render your props on the fly 🧪",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && tsup src/index.tsx src/styles.ts",
+    "build": "pnpm dist:clean && pnpm dist:build",
+    "dist:build": "tsup src/index.tsx src/styles.ts",
+    "dist:clean": "rimraf dist",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "lint:ci": "eslint --ext .ts,.tsx",
     "test": "vitest run",
