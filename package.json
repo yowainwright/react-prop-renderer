@@ -34,7 +34,7 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@storybook/addon-actions": "^7.0.2",
-    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-essentials": "^7.0.2",
     "@storybook/addon-links": "^7.0.2",
     "@storybook/builder-vite": "^7.0.2",
     "@storybook/cli": "^6.5.9",
