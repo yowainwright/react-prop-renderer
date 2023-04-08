@@ -37,7 +37,7 @@
     "@storybook/addon-essentials": "^7.0.2",
     "@storybook/addon-links": "^7.0.2",
     "@storybook/builder-vite": "^7.0.2",
-    "@storybook/cli": "^6.5.9",
+    "@storybook/cli": "^7.0.2",
     "@storybook/react": "^7.0.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
