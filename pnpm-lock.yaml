@@ -17,7 +17,7 @@ devDependencies:
     version: 17.6.5
   '@commitlint/config-conventional':
     specifier: ^17.0.3
-    version: 17.0.3
+    version: 17.6.5
   '@storybook/addon-actions':
     specifier: ^7.0.2
     version: 7.0.20(react-dom@17.0.2)(react@17.0.2)
@@ -2526,8 +2526,8 @@ packages:
       - '@swc/wasm'
     dev: true
 
-  /@commitlint/config-conventional@17.0.3:
-    resolution: {integrity: sha512-HCnzTm5ATwwwzNVq5Y57poS0a1oOOcd5pc1MmBpLbGmSysc4i7F/++JuwtdFPu16sgM3H9J/j2zznRLOSGVO2A==}
+  /@commitlint/config-conventional@17.6.5:
+    resolution: {integrity: sha512-Xl9H9KLl86NZm5CYNTNF9dcz1xelE/EbvhWIWcYxG/rn3UWYWdWmmnX2q6ZduNdLFSGbOxzUpIx61j5zxbeXxg==}
     engines: {node: '>=v14'}
     dependencies:
       conventional-changelog-conventionalcommits: 5.0.0
