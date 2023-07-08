@@ -60,7 +60,7 @@
     "tsup": "^7.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
-    "vitest": "^0.32.0"
+    "vitest": "^0.33.0"
   },
   "config": {
     "commitizen": {
