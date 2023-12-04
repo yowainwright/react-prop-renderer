@@ -57,7 +57,7 @@ devDependencies:
     version: 18.0.6
   '@types/styled-components':
     specifier: ^5.1.25
-    version: 5.1.25
+    version: 5.1.32
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.30.6
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.53.0)(typescript@5.2.2)
@@ -4458,12 +4458,12 @@ packages:
       '@types/node': 20.10.0
     dev: true
 
-  /@types/styled-components@5.1.25:
-    resolution: {integrity: sha512-fgwl+0Pa8pdkwXRoVPP9JbqF0Ivo9llnmsm+7TCI330kbPIFd9qv1Lrhr37shf4tnxCOSu+/IgqM7uJXLWZZNQ==}
+  /@types/styled-components@5.1.32:
+    resolution: {integrity: sha512-DqVpl8R0vbhVSop4120UHtGrFmHuPeoDwF4hDT0kPJTY8ty0SI38RV3VhCMsWigMUXG+kCXu7vMRqMFNy6eQgA==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.0.15
-      csstype: 3.1.0
+      csstype: 3.1.2
     dev: true
 
   /@types/stylis@4.2.0:
